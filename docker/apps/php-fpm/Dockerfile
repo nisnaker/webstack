@@ -32,6 +32,7 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
 
 RUN sed -ri 's/short_open_tag = Off/short_open_tag = On/' /etc/php7/php.ini \
     && sed -ri 's/upload_max_filesize = 2M/upload_max_filesize = 20M/' /etc/php7/php.ini \
+    && sed -ri 's/variables_order = "GPCS"/variables_order = "EGPCS"/' /etc/php7/php.ini \
     && sed -ri 's/user = nobody/user = webstack/' /etc/php7/php-fpm.d/www.conf \
     && sed -ri 's/group = nobody/group = webstack/' /etc/php7/php-fpm.d/www.conf \
     && sed -ri 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /etc/php7/php-fpm.d/www.conf \
