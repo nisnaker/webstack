@@ -39,7 +39,8 @@ RUN sed -ri 's/short_open_tag = Off/short_open_tag = On/' /etc/php7/php.ini \
     && sed -ri 's/pm.max_children = 5/pm.max_children = 128/' /etc/php7/php-fpm.d/www.conf \
     && sed -ri 's/pm.start_servers = 2/pm.start_servers = 20/' /etc/php7/php-fpm.d/www.conf \
     && sed -ri 's/pm.min_spare_servers = 1/pm.min_spare_servers = 20/' /etc/php7/php-fpm.d/www.conf \
-    && sed -ri 's/pm.max_spare_servers = 3/pm.max_spare_servers = 128/' /etc/php7/php-fpm.d/www.conf
+    && sed -ri 's/pm.max_spare_servers = 3/pm.max_spare_servers = 128/' /etc/php7/php-fpm.d/www.conf \
+    && echo 'clear_env = no' >> /etc/php7/php-fpm.d/www.conf
 
 VOLUME /var/www
 
