@@ -35,7 +35,7 @@ if [ "$1" = 'mysqld' -a ! -d "$DATADIR/mysql" ]; then
 
 	# init user
 
-	# MYSQL_VIEWER_PASSWORD=`cat /dev/urandom | tr -cd 'a-j0-9' | head -c 32`
+	MYSQL_VIEWER_PASSWORD=`cat /dev/urandom | tr -cd 'a-j0-9' | head -c 32`
 
 	mysql --protocol=socket -uroot <<-SQL
 		-- https://github.com/docker-library/mariadb/blob/master/10.1/docker-entrypoint.sh
