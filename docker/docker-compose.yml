@@ -1,0 +1,40 @@
+mariadb:
+  image: "nisnaker/webstack:mariadb"
+  container_name: mariadb
+  environment:
+    - MYSQL_ROOT_PASSWORD=123456
+  volumes_from:
+    - mariadb-data
+
+mariadb-data:
+  image: "busybox"
+  container_name: "mariadb-data"
+  volumes:
+    - /var/lib/mysql
+  command: echo "Mariadb data volume"
+
+code:
+  image: "busybox"
+  container_name: "code"
+  volumes:
+    - /codedir:/var/www
+  command: echo "Project files"
+
+php-fpm:
+  image: "nisnaker/webstack:php-fpm"
+  container_name: "php-fpm"
+  volumes_from:
+    - code
+  links:
+    - mariadb
+
+nginx:
+  image: "nisnaker/webstack:nginx"
+  container_name: nginx
+  ports:
+    - 80:80
+    - 443:443
+  volumes_from:
+    - code
+  links:
+    - php-fpm
