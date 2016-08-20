@@ -1,8 +1,6 @@
 #!/bin/sh
 
-DATADIR=mysqld -verbose --help --log-bin-index='mktemp -u' 2> /dev/null | awk '$1 == "datadir" {print $2;exit}'
-
-if [ "$1" = 'mysqld' -a ! -d "$DATADIR/mysql" ]; then
+if [ "$1" = 'mysqld' -a ! -d "/var/lib/mysql/mysql" ]; then
 
 	# check MYSQL_ROOT_PASSWORD
 	if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
