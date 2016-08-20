@@ -61,7 +61,7 @@ if [ "$1" = 'mysqld' -a ! -d "/var/lib/mysql/mysql" ]; then
 
 	# mysqladmin -uroot --protocol=socket password "${MYSQL_ROOT_PASSWORD}"
 
-	echo ${MYSQL_VIEWER_PASSWORD} > /root/viewer.passwd
+	echo ${MYSQL_VIEWER_PASSWORD} > /var/lib/mysql/viewer.passwd
 
 
 	if ! kill -s TERM "$pid" || ! wait "$pid"; then
