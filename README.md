@@ -16,3 +16,5 @@ docker run --rm -it --name rsync_server -v /dst:/data -e ROLE=server -p 873 nisn
 docker run --rm -it --name rsync_client -v /src:/data -e ROLE=client -e REMOTE_HOST=172.17.0.1 nisnaker/webstack:rsync
 
 ```
+
+[example docker-compose.yml](https://github.com/nisnaker/webstack/blob/master/docker/docker-compose.yml)
