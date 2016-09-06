@@ -16,10 +16,12 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
         php7-json \
         php7-mbstring \
         php7-mcrypt \
+        php7-mongodb \
         php7-mysqli \
         php7-opcache \
         php7-pdo_mysql \
         php7-posix \
+        php7-redis \
         php7-session \
         php7-xml \
         php7-iconv \
