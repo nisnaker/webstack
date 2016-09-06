@@ -2,8 +2,7 @@ FROM alpine:latest
 
 MAINTAINER https://github.com/nisnaker/webstack
 
-RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk --update add nginx \
+RUN apk -U add nginx \
     && addgroup -g 901 -S webstack \
     && adduser -u 901 -D -S -G webstack webstack
 

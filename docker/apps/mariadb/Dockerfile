@@ -2,8 +2,7 @@ FROM alpine:latest
 
 MAINTAINER https://github.com/nisnaker/webstack
 
-RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk --update add mariadb mariadb-client \
+RUN apk -U add mariadb mariadb-client \
 	&& rm /etc/mysql/my.cnf
 
 COPY my.cnf /etc/mysql/my.cnf

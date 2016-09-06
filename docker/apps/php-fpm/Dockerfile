@@ -4,8 +4,9 @@ MAINTAINER https://github.com/nisnaker/webstack
 
 # https://hub.docker.com/r/yavin/alpine-php-fpm/~/dockerfile/
 
-RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk --update add \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk -U add \
         php7 \
         php7-dom \
         php7-ctype \

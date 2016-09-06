@@ -11,6 +11,8 @@ docker run -d --name nginx --link php-fpm:php-fpm -p 8080:80  -v /localproject:/
 
 docker run -d --name redis -p 6379:6379 nisnaker/webstack:redis
 
+docker run -d --name mongodb -p 27017:27017 nisnaker/webstack:mongodb
+
 ----
 
 docker run --rm -it --name rsync_server -v /dst:/data -e ROLE=server -p 873 nisnaker/webstack:rsync
