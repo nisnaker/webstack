@@ -13,6 +13,15 @@ mariadb-data:
     - /var/lib/mysql
   command: echo "Mariadb data volume"
 
+redis:
+  image: "nisnaker/webstack:redis"
+  container_name: redis
+  
+mongodb:
+  image: "nisnaker/webstack:mongodb"
+  container_name: mongodb
+
+
 code:
   image: "busybox"
   container_name: "code"
@@ -27,6 +36,8 @@ php-fpm:
     - code
   links:
     - mariadb
+    - redis
+    - mongodb
 
 nginx:
   image: "nisnaker/webstack:nginx"
