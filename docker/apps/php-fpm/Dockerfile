@@ -36,7 +36,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 RUN sed -ri 's/short_open_tag = Off/short_open_tag = On/' /etc/php7/php.ini \
     && sed -ri 's/upload_max_filesize = 2M/upload_max_filesize = 20M/' /etc/php7/php.ini \
     && sed -ri 's/variables_order = "GPCS"/variables_order = "EGPCS"/' /etc/php7/php.ini \
-    && sed -ri 's/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING/' /etc/php7/php.ini \
+    && sed -ri 's/error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_STRICT/error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_STRICT \& ~E_NOTICE \& ~E_WARNING/' /etc/php7/php.ini \
     && sed -ri 's/user = nobody/user = webstack/' /etc/php7/php-fpm.d/www.conf \
     && sed -ri 's/group = nobody/group = webstack/' /etc/php7/php-fpm.d/www.conf \
     && sed -ri 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /etc/php7/php-fpm.d/www.conf \
