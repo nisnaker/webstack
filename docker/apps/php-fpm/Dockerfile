@@ -28,6 +28,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-iconv \
         php7-phar \
         php7-openssl \
+        php7-soap \
     && rm -rf /var/cache/apk/* \
     && ln -s /usr/bin/php7 /usr/bin/php \
     && addgroup -g 901 -S webstack \
