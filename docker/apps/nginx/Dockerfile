@@ -9,6 +9,7 @@ COPY php.conf /etc/nginx/php.conf
 COPY fastcgi_params /etc/nginx/fastcgi_params
 COPY servers /etc/nginx/servers
 COPY cutlog.sh /usr/local/bin/cutlog.sh
+COPY entrypoint.sh /usr/local/bin/
 
 RUN NPROC=$(getconf _NPROCESSORS_ONLN) \
 	&& sed -i "s/worker_processes  1/worker_processes  ${NPROC}/" /etc/nginx/nginx.conf \
@@ -16,4 +17,6 @@ RUN NPROC=$(getconf _NPROCESSORS_ONLN) \
 
 EXPOSE 80 443
 
-CMD ["crond && nginx", "-g", "daemon off;"]
+ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]
