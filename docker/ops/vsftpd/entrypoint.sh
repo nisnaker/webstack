@@ -15,7 +15,7 @@ if [[ ! -f /etc/vsftpd.conf ]]; then
 	echo ${FTP_USER}:${FTP_PASS} | chpasswd > /dev/null
 	chown -R ${FTP_USER}.ftp /data
 
-	echo "Vsftpd inited."
+	echo "Vsftpd is listening..."
 
 fi
 
