@@ -21,7 +21,7 @@ docker run --rm -it --name rsync_client -v /src:/data -e ROLE=client -e REMOTE_H
 
 ----
 
-docker run --rm -it --name vsftpd -p 20-21:20-21 -p 21100-21110:21100-21110 -v $(pwd):/data -e FTP_USER=admin -e FTP_PASS="admin@123" vsftpd
+docker run --rm -it --name vsftpd -p 20-21:20-21 -p 21100-21110:21100-21110 -v $(pwd):/data -e FTP_USER=admin -e FTP_PASS="admin@123" nisnaker/webstack:vsftpd
 
 ```
 
