@@ -19,6 +19,10 @@ docker run --rm -it --name rsync_server -v /dst:/data -e ROLE=server -p 873 nisn
 
 docker run --rm -it --name rsync_client -v /src:/data -e ROLE=client -e REMOTE_HOST=172.17.0.1 nisnaker/webstack:rsync
 
+----
+
+docker run --rm -it --name vsftpd -p 20-21:20-21 -p 21100-21110:21100-21110 -v $(pwd):/data -e FTP_USER=admin -e FTP_PASS="admin@123" vsftpd
+
 ```
 
 [example docker-compose.yml](https://github.com/nisnaker/webstack/blob/master/docker/docker-compose.yml)
