@@ -4,10 +4,7 @@ MAINTAINER https://github.com/nisnaker/webstack
 
 # https://hub.docker.com/r/yavin/alpine-php-fpm/~/dockerfile/
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
-    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && apk -U add \
+RUN apk -U add \
         git \
         php7 \
         php7-dom \
@@ -19,12 +16,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-json \
         php7-mbstring \
         php7-mcrypt \
-        php7-mongodb \
         php7-mysqli \
         php7-opcache \
         php7-pdo_mysql \
         php7-posix \
-        php7-redis \
         php7-session \
         php7-xml \
         php7-iconv \
@@ -34,10 +29,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-zlib \
     && rm -rf /var/cache/apk/* \
     && ln -s /usr/bin/php7 /usr/bin/php \
-    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
-    && php composer-setup.php --install-dir=/bin/ --filename=composer \
-    && php -r "unlink('composer-setup.php');"
+    && php -r "readfile('https://getcomposer.org/installer');" | php \
+    && mv composer.phar /usr/local/bin/composer
 
 RUN sed -i 's/short_open_tag = Off/short_open_tag = On/' /etc/php7/php.ini \
     && sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 20M/' /etc/php7/php.ini \
