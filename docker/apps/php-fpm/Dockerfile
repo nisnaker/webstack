@@ -27,6 +27,7 @@ RUN apk -U add \
         php7-openssl \
         php7-soap \
         php7-zlib \
+        php7-zip \
     && rm -rf /var/cache/apk/* \
     && ln -s /usr/bin/php7 /usr/bin/php \
     && php -r "readfile('https://getcomposer.org/installer');" | php \
