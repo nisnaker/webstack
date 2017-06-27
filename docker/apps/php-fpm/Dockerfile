@@ -28,6 +28,8 @@ RUN apk -U add \
         php7-soap \
         php7-zlib \
         php7-zip \
+        php7-xmlwriter \
+        php7-tokenizer \
     && rm -rf /var/cache/apk/* \
     && php -r "readfile('https://getcomposer.org/installer');" | php \
     && mv composer.phar /usr/local/bin/composer
