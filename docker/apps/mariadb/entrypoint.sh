@@ -57,6 +57,7 @@ if [ "$1" = 'mysqld' -a ! -d "/var/lib/mysql/mysql" ]; then
 
 		DROP DATABASE IF EXISTS test ;
 		FLUSH PRIVILEGES ;
+		SET @@SESSION.SQL_LOG_BIN=1;
 	SQL
 
 	# mysqladmin -uroot --protocol=socket password "${MYSQL_ROOT_PASSWORD}"
