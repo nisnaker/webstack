@@ -8,13 +8,18 @@ if [ "$1" = 'mysqld' -a ! -d "/var/lib/mysql/mysql" ]; then
 		exit 1
 	fi
 
+	# chown -R mysql:mysql /var/lib/mysql
+	# mkdir /run/mysqld && chown -R mysql:mysql /run/mysqld
+	
+	mkdir /run/mysqld
+
 	echo 'Initializing database'
 	mysql_install_db --rpm
 	echo 'Database initialized'
 
 	# set password of root
 
-	mysqld --skip-networking &
+	mysqld --skip-networking -uroot &
 	pid="$!"
 
 	for i in `seq 0 30`; do
