@@ -2,7 +2,8 @@ FROM alpine:latest
 
 MAINTAINER https://github.com/nisnaker/webstack
 
-RUN apk -U add mariadb mariadb-client
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/' /etc/apk/repositories \
+  && apk -U add mariadb mariadb-client
 
 COPY entrypoint.sh /usr/local/bin/
 

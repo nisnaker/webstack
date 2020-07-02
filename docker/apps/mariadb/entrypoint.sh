@@ -11,15 +11,17 @@ if [ "$1" = 'mysqld' -a ! -d "/var/lib/mysql/mysql" ]; then
 	# chown -R mysql:mysql /var/lib/mysql
 	# mkdir /run/mysqld && chown -R mysql:mysql /run/mysqld
 	
-	mkdir /run/mysqld
+	if [ ! -d "/run/mysqld" ]; then
+		mkdir /run/mysqld
+	fi
 
 	echo 'Initializing database'
-	mysql_install_db --rpm
+	mysql_install_db --rpm --datadir=/var/lib/mysql
 	echo 'Database initialized'
 
 	# set password of root
 
-	mysqld --skip-networking -uroot &
+	mysqld --skip-networking -uroot --socket=/run/mysqld/mysqld.sock &
 	pid="$!"
 
 	for i in `seq 0 30`; do
@@ -45,10 +47,8 @@ if [ "$1" = 'mysqld' -a ! -d "/var/lib/mysql/mysql" ]; then
 		-- What's done in this file shouldn't be replicated
 		-- or products like mysql-fabric won't work
 		SET @@SESSION.SQL_LOG_BIN=0;
-		DELETE FROM mysql.user ;
-		FLUSH PRIVILEGES ;
-
-		CREATE USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;
+		DELETE FROM mysql.user WHERE user NOT IN ('mysql.sys', 'mariadb.sys', 'mysqlxsys', 'root') OR host NOT IN ('localhost');
+		SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}');
 		GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION ;
 
 		-- add a user for php-fpm
